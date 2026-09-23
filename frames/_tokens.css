@@ -1,0 +1,17 @@
+:root{--primary:#1B4DD8;--teal:#0E9F8A;--ink:#0F1B2D;--muted:#5B6B82;--bg:#F6F8FC;--card:#fff;--radius:16px;--focus:#FFB300}
+*{box-sizing:border-box}body{margin:0;font-family:'Plus Jakarta Sans',Inter,Arial,sans-serif;color:var(--ink);background:var(--bg);width:1440px}
+a{color:var(--primary)}
+.btn{display:inline-block;min-height:48px;line-height:48px;padding:0 28px;border-radius:12px;background:var(--primary);color:#fff;font-weight:700;text-decoration:none}
+.btn-ghost{background:#fff;color:var(--primary);border:2px solid var(--primary)}
+.card{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 2px 12px rgba(15,27,45,.08)}
+.chip{display:inline-block;padding:8px 16px;border-radius:999px;background:#E8EEFB;font-weight:600}
+.badge{display:inline-block;padding:6px 12px;border-radius:8px;background:#E6F6F1;color:#0B7A67;font-weight:700}
+.nav{display:flex;align-items:center;gap:32px;padding:20px 64px;background:#fff;border-bottom:1px solid #E3E9F2}
+.nav .logo{font-weight:800;font-size:22px;color:var(--primary);text-decoration:none}
+.nav a.link{text-decoration:none;color:var(--ink);font-weight:600}
+.footer{background:#0F1B2D;color:#DCE5F2;padding:48px 64px;margin-top:64px}
+.footer a{color:#DCE5F2}
+.job-card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(15,27,45,.08)}
+.job-card h3{margin:8px 0}
+.job-card p{margin:4px 0;color:var(--muted)}
+:focus-visible{outline:4px solid var(--focus);outline-offset:2px}
