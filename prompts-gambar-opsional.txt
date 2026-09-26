@@ -1,0 +1,18 @@
+PROMPT OPSIONAL — 11 file (web tetap rapi tanpa ini, fallback gradient + inisial teks)
+Simpan ke Downloads\UNTUKLOMBA\assets\ dengan nama persis. Generate bila sempat / untuk presentasi.
+
+STRIP HOME (4):
+1. strip-kantor-1.jpg — "Bright accessible Indonesian office interior with ramp and wide aisles, empty, architectural photo, no people, no text" --ar 16:9
+2. strip-interview.jpg — "Inclusive job interview in Jakarta office, HR manager shaking hands with a deaf candidate while an interpreter signs beside them, bright, professional stock photo, no text" --ar 16:9
+3. strip-workshop.jpg — "Young Indonesian worker learning alongside a friendly mentor in a tidy garment workshop, warm supportive mood, professional stock photo, no text" --ar 16:9
+4. strip-ruang-tenang.jpg — "Calm sensory-friendly office quiet room, soft light, plants, comfortable seating, empty, architectural photo, no text" --ar 16:9
+
+REPRESENTASI DISABILITAS — frame employer + slide presentasi (5):
+5. rep-netra.jpg — "Blind Indonesian professional using laptop with screen reader and braille display at a desk, dignified, bright office, no text" --ar 16:9
+6. rep-rungu.jpg — "Deaf Indonesian professional woman communicating in sign language during a meeting, colleagues attentive, bright office, no text" --ar 16:9
+7. rep-daksa.jpg — "Wheelchair user professional working at an accessible desk in modern Jakarta office with ramp visible, confident, no text" --ar 16:9
+8. rep-grahita.jpg — "Young worker with intellectual disability learning alongside a mentor in tidy workshop, warm mood, no text" --ar 16:9
+9. rep-mental.jpg — "Calm employee resting in a quiet sensory room with plants and soft light, peaceful, no text" --ar 16:9
+
+LOGO PERUSAHAAN (5 file 1 prompt, boleh skip total):
+10. logo-apparel.png / logo-mahayasa.png / logo-karsa.png / logo-layanan.png / logo-cerah.png — "Simple flat vector company logo mark, [sewing needle / circuit M / paintbrush K / headset / sun], blue-teal palette, plain white background, no text" --ar 1:1

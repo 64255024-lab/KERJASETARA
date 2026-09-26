@@ -1,0 +1,18 @@
+PROMPT WAJIB — 14 file (web penuh tanpa ini terlihat kosong)
+Simpan ke Downloads\UNTUKLOMBA\assets\ dengan nama persis. Gaya: fotografi cerah profesional, inklusif Indonesia, tanpa teks di gambar.
+
+1. logo.png — "Minimalist app logo, rounded square gradient from deep blue #1B4DD8 to teal #0E9F8A, white abstract symbol combining letter K with an upward arrow and a circle head suggesting a person rising, flat vector, no text, centered, plain white background" --ar 1:1
+2. hero-tim-inklusif.jpg — "Diverse Indonesian office team including a wheelchair user, a woman with hijab, and a man with hearing aid collaborating around a table, bright modern office, natural light, professional stock photo, no text" --ar 3:2
+3. co-apparel.jpg — "Tidy garment sewing workshop in Semarang, sewing machines in a row, bright daylight, no people close-up, no text" --ar 16:9
+4. co-mahayasa.jpg — "Modern small tech office in Denpasar, desks with monitors, plants, bright, no people, no text" --ar 16:9
+5. co-karsa.jpg — "Creative design studio Jakarta, moodboard wall and designer desks, bright, no people, no text" --ar 16:9
+6. co-layanan.jpg — "Customer support team workspace with headsets on desks, bright office, no faces, no text" --ar 16:9
+7. co-tumbuh.jpg — "Friendly nonprofit office Bandung with bookshelf and meeting table, bright, no people, no text" --ar 16:9
+8. co-cerah.jpg — "Editorial newsroom Yogyakarta with laptops and notebooks, bright, no people, no text" --ar 16:9
+9. co-solusi.jpg — "Computer repair lab Surabaya with tools and PCs on workbench, bright, no people, no text" --ar 16:9
+10. co-kopi.jpg — "Cozy specialty coffee bar Jakarta with espresso machine, warm light, no people, no text" --ar 16:9
+11. cta-profil.jpg — "Smiling young Indonesian professional woman with laptop in bright office, professional stock photo, no text" --ar 4:3
+12. tips-cv.jpg — "Resume document and laptop on a clean desk, top view, bright, no readable text" --ar 16:9
+13. tips-interview.jpg — "Two people in a friendly job interview across a table, bright office, back view, no text" --ar 16:9
+14. tips-hak.jpg — "Indonesian labor law booklet and gavel on desk, shallow depth, no readable text" --ar 16:9
+(+ tips-portofolio.jpg — "Designer portfolio open showing colorful layouts on a desk, bright, no readable text" --ar 16:9 — dihitung bonus ke-15 bila mau genap)
