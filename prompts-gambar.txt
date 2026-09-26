@@ -1,10 +1,42 @@
-Prompt gambar AI — KerjaSetara (fotografi cerah profesional, inklusif Indonesia, --ar 16:9)
+PROMPT GAMBAR AI — KerjaSetara (hasil generate simpan di folder assets/ dengan nama file persis di bawah)
+Gaya global semua prompt: fotografi cerah profesional, inklusif Indonesia, natural light, أجل hindari teks di gambar. Rasio: hero 3:2, cover loker 16:9, logo persegi.
 
-1. Hero: diverse Indonesian office team including wheelchair user, woman with hijab, and man with hearing aid collaborating around a table, bright modern office, natural light, professional stock photo --ar 16:9
-2. Blind professional using laptop with screen reader and braille display at a desk, close-up, bright office, dignified, professional stock photo --ar 16:9
-3. Deaf Indonesian professional woman communicating in BISINDO sign language during a meeting, colleagues attentive, bright office, professional stock photo --ar 16:9
-4. Wheelchair user professional working at an accessible desk in a modern Jakarta office with ramp visible, confident, professional stock photo --ar 16:9
-5. Young worker with intellectual disability learning alongside a friendly mentor in a tidy workshop, warm supportive mood, professional stock photo --ar 16:9
-6. Calm quiet sensory-friendly office room with soft light, plants, comfortable seating for mental health, empty, architectural photo --ar 16:9
-7. Inclusive job interview: HR manager shaking hands with a deaf candidate while an interpreter signs beside them, bright office, professional stock photo --ar 16:9
-8. Happy diverse Indonesian team of six with different disabilities smiling at camera in office lobby, bright, professional stock photo --ar 16:9
+=== A. LOGO & BRANDING (2 file) ===
+1. logo.png — "Minimalist app logo, rounded square gradient from deep blue #1B4DD8 to teal #0E9F8A, white abstract symbol combining letter K with an upward arrow and a circle head suggesting a person rising, flat vector, no text, centered, plain white background" --ar 1:1
+2. logo-apparel.png s/d logo-cerah.png — (opsional, boleh skip: pakai inisial teks saja) "5 flat minimal company logo placeholders, simple geometric marks in blue/teal/grey, no text"
+
+=== B. HERO & PITA HOME (6 file) ===
+3. hero-tim-inklusif.jpg — "Diverse Indonesian office team including a wheelchair user, a woman with hijab, and a man with hearing aid collaborating around a table, bright modern office, natural light, professional stock photo, no text" --ar 3:2
+4. strip-kantor-1.jpg — "Bright accessible Indonesian office interior with ramp and wide aisles, empty, architectural photo, no people, no text" --ar 16:9
+5. strip-interview.jpg — "Inclusive job interview in Jakarta office, HR manager shaking hands with a deaf candidate while an interpreter signs beside them, bright, professional stock photo, no text" --ar 16:9
+6. strip-workshop.jpg — "Young Indonesian worker learning alongside a friendly mentor in a tidy garment workshop, warm supportive mood, professional stock photo, no text" --ar 16:9
+7. strip-ruang-tenang.jpg — "Calm sensory-friendly office quiet room, soft light, plants, comfortable seating, empty, architectural photo, no text" --ar 16:9
+8. cta-profil.jpg — "Smiling young Indonesian professional woman with laptop in bright office, portrait orientation feel, professional stock photo, no text" --ar 4:3
+
+=== C. COVER KARTU LOKER (8 file, 16:9) ===
+9. co-apparel.jpg — "Tidy garment sewing workshop in Semarang, sewing machines in a row, bright daylight, no people close-up, no text" --ar 16:9
+10. co-mahayasa.jpg — "Modern small tech office in Denpasar, desks with monitors, plants, bright, no people, no text" --ar 16:9
+11. co-karsa.jpg — "Creative design studio Jakarta, moodboard wall and designer desks, bright, no people, no text" --ar 16:9
+12. co-layanan.jpg — "Customer support team workspace with headsets on desks, bright office, no faces, no text" --ar 16:9
+13. co-tumbuh.jpg — "Friendly nonprofit office Bandung with bookshelf and meeting table, bright, no people, no text" --ar 16:9
+14. co-cerah.jpg — "Editorial newsroom Yogyakarta with laptops and notebooks, bright, no people, no text" --ar 16:9
+15. co-solusi.jpg — "Computer repair lab Surabaya with tools and PCs on workbench, bright, no people, no text" --ar 16:9
+16. co-kopi.jpg — "Cozy specialty coffee bar Jakarta with espresso machine, warm light, no people, no text" --ar 16:9
+
+=== D. TIPS KARIER (4 file) ===
+17. tips-cv.jpg — "Resume document and laptop on a clean desk, top view, bright, no readable text" --ar 16:9
+18. tips-interview.jpg — "Two people in a friendly job interview across a table, bright office, back view, no text" --ar 16:9
+19. tips-hak.jpg — "Indonesian labor law booklet and gavel on desk, shallow depth, no readable text" --ar 16:9
+20. tips-portofolio.jpg — "Designer portfolio open showing colorful layouts on a desk, bright, no readable text" --ar 16:9
+
+=== E. REPRESENTASI DISABILITAS / EMPLOYER (5 file, untuk frame 20-employer + presentasi) ===
+21. rep-netra.jpg — "Blind Indonesian professional using laptop with screen reader and braille display at a desk, dignified, bright office, no text" --ar 16:9
+22. rep-rungu.jpg — "Deaf Indonesian professional woman communicating in sign language during a meeting, colleagues attentive, bright office, no text" --ar 16:9
+23. rep-daksa.jpg — "Wheelchair user professional working at an accessible desk in modern Jakarta office with ramp visible, confident, no text" --ar 16:9
+24. rep-grahita.jpg — "Young worker with intellectual disability learning alongside a mentor in tidy workshop, warm mood, no text" --ar 16:9
+25. rep-mental.jpg — "Calm employee resting in a quiet sensory room with plants and soft light, peaceful, no text" --ar 16:9
+
+=== F. LOGO PERUSAHAAN (5 file, boleh skip — fallback inisial) ===
+26. logo-apparel.png / logo-mahayasa.png / logo-karsa.png / logo-layanan.png / logo-cerah.png — "Simple flat vector company logo mark, [sewing needle / circuit M / paintbrush K / headset / sun], blue-teal palette, plain white background, no text" --ar 1:1
+
+CARA PAKAI: generate → simpan ke Downloads\UNTUKLOMBA\assets\ dengan nama persis → frame otomatis tampil. Prioritas generate: logo.png, hero-tim-inklusif.jpg, 8 co-*.jpg, 4 strip/cta, 4 tips. Total 25 file, minimal jalan 14 file (logo + hero + 8 cover + cta + 4 tips).
