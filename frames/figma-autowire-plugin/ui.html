@@ -1,0 +1,38 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  body{font-family:Inter,Arial,sans-serif;font-size:12px;margin:0;padding:14px;color:#222}
+  h2{font-size:14px;margin:0 0 4px}
+  p.sub{color:#666;margin:0 0 10px}
+  button{background:#1B4DD8;color:#fff;border:none;border-radius:8px;padding:9px 12px;font-weight:700;width:100%;margin-top:8px;cursor:pointer}
+  button.ghost{background:#EEF2FF;color:#1B4DD8}
+  label.row{display:flex;gap:8px;align-items:center;margin:7px 0}
+  #log{background:#0F1B2D;color:#DCE5F2;border-radius:8px;padding:8px;height:230px;overflow:auto;white-space:pre-wrap;font-size:11px;margin-top:10px}
+  #frames{color:#666;font-size:11px;margin-top:6px}
+</style></head>
+<body>
+  <h2>KerjaSetara Autowire</h2>
+  <p class="sub">Wire prototype otomatis dari teks tombol (On Click → Navigate To). Frame harus bernama <b>NN-*</b> (02-home … 21-pricing) dalam 1 page.</p>
+  <label class="row"><input type="checkbox" id="nav" checked> Nav global (nav + footer links)</label>
+  <label class="row"><input type="checkbox" id="cards" checked> Wire sekartu loker (klik kartu → detail)</label>
+  <label class="row"><input type="checkbox" id="smart" checked> Transisi Smart Animate</label>
+  <label class="row"><input type="checkbox" id="empty"> Hanya yang belum punya koneksi</label>
+  <button id="scan" class="ghost">1 · Scan frame di page ini</button>
+  <button id="wire">2 · Wire prototype sekarang</button>
+  <div id="frames"></div>
+  <div id="log">Siap. Klik Scan dulu.</div>
+<script>
+  const log = t => { const el=document.getElementById('log'); el.textContent += '\n'+t; el.scrollTop=el.scrollHeight; };
+  document.getElementById('scan').onclick = () => parent.postMessage({pluginMessage:{type:'scan'}},'*');
+  document.getElementById('wire').onclick = () => parent.postMessage({pluginMessage:{type:'wire',options:{
+    includeNav:document.getElementById('nav').checked,
+    includeCards:document.getElementById('cards').checked,
+    smart:document.getElementById('smart').checked,
+    onlyEmpty:document.getElementById('empty').checked }}},'*');
+  onmessage = e => {
+    const m = e.data.pluginMessage; if(!m) return;
+    if(m.type==='scanned') document.getElementById('frames').textContent = m.frames.length+' frame: '+m.frames.map(f=>f.name).join(', ');
+    if(m.type==='log') log(m.text);
+  };
+</script>
+</body></html>

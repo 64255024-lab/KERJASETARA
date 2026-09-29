@@ -1,0 +1,65 @@
+<meta charset="utf-8"><style>:root{--primary:#1B4DD8;--primary-deep:#12327E;--primary-soft:#EAF0FE;--teal:#0E9F8A;--teal-soft:#E6F6F1;--amber:#F59E0B;--ink:#0F1B2D;--muted:#5B6B82;--bg:#F2F5FB;--card:#fff;--line:#E3E9F3;--radius:22px;--focus:#FFB300;--shadow:0 8px 30px rgba(27,77,216,.08);--shadow-hover:0 16px 44px rgba(27,77,216,.16)}
+*{box-sizing:border-box}html{background:#F2F5FB}body{margin:0 auto;font-family:'Plus Jakarta Sans',Inter,Arial,sans-serif;color:#0F1B2D;background:#F2F5FB;width:100%;max-width:1440px;min-height:100vh;-webkit-font-smoothing:antialiased}img{max-width:100%}
+a{color:#1B4DD8;text-decoration:none}
+a:hover{text-decoration:underline}
+input,select,textarea{border:1.5px solid #E3E9F3;border-radius:14px;padding:0 16px;font:inherit;background:#fff;transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{border-color:#1B4DD8;box-shadow:0 0 0 4px rgba(27,77,216,.15);outline:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 32px;border-radius:999px;background:linear-gradient(135deg,#1B4DD8,#3B6BF0);color:#fff;font-weight:700;text-decoration:none;box-shadow:0 8px 20px rgba(27,77,216,.28);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(27,77,216,.34);text-decoration:none;color:#fff}
+.btn-ghost{background:#fff;color:#1B4DD8;border:1.5px solid #C9D6F2;box-shadow:none}
+.btn-ghost:hover{box-shadow:0 8px 30px rgba(27,77,216,.08);color:#1B4DD8}
+.card{background:#ffffff;border:1px solid #E3E9F3;border-radius:22px;padding:28px;box-shadow:0 8px 30px rgba(27,77,216,.08)}
+.chip{display:inline-block;padding:8px 16px;border-radius:999px;background:#EAF0FE;color:#1B3FA0;font-weight:600;font-size:14px}
+.badge{display:inline-block;padding:6px 12px;border-radius:999px;background:#E6F6F1;color:#0B7A67;font-weight:700;font-size:13px}
+.mode-pill{display:inline-block;padding:10px 20px;border-radius:999px;background:#fff;border:1.5px solid #E3E9F3;font-weight:600;transition:all .2s}
+.mode-pill:hover{border-color:#1B4DD8;box-shadow:0 8px 30px rgba(27,77,216,.08)}
+.nav{display:flex;align-items:center;gap:32px;padding:18px 64px;background:#fff;border-bottom:1px solid #E3E9F3;position:sticky;top:0;z-index:100}
+.nav .logo{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:22px;color:#1B4DD8;text-decoration:none}
+.nav .logo img{width:36px;height:36px;border-radius:10px;object-fit:cover;background:#EAF0FE}
+.nav a.link{text-decoration:none;color:#0F1B2D;font-weight:600}
+.hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#12327E 0%,#1B4DD8 45%,#0E9F8A 100%);color:#fff;border-radius:0 0 48px 48px}
+.hero .sub{color:#D7E3FF}
+.hero .img-slot{position:absolute;right:64px;top:48px;width:420px;height:300px;border-radius:28px;object-fit:cover;border:4px solid rgba(255,255,255,.35);box-shadow:0 24px 60px rgba(0,0,0,.3)}
+.section-band{background:linear-gradient(135deg,#1B4DD8,#3B6BF0);color:#fff;border:none}
+.section-band p{color:#D7E3FF}
+.footer{background:#0B1730;color:#DCE5F2;padding:48px 64px;margin-top:64px;border-radius:48px 48px 0 0}
+.footer a{color:#DCE5F2}
+.job-card{background:#fff;border:1px solid #E3E9F3;border-radius:20px;padding:0;overflow:hidden;box-shadow:0 8px 30px rgba(27,77,216,.08);transition:transform .2s,box-shadow .2s}
+.job-card:hover{transform:translateY(-4px);box-shadow:0 16px 44px rgba(27,77,216,.16)}
+.job-card img.cover{width:100%;height:130px;object-fit:cover;background:linear-gradient(135deg,#DCE7FF,#E6F6F1);display:block}
+.job-card .pad{padding:20px 24px 24px}
+.job-card h3{margin:8px 0;font-size:19px}
+.job-card p{margin:4px 0;color:#5B6B82;font-size:14.5px}
+.searchbar{display:flex;gap:12px;background:#fff;border:1px solid #E3E9F3;border-radius:999px;padding:10px 10px 10px 28px;box-shadow:0 8px 30px rgba(27,77,216,.08);align-items:center}
+.searchbar input{border:none;box-shadow:none;flex:1;min-height:48px}
+.searchbar input:focus{box-shadow:none}
+.kpi{display:flex;gap:16px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.kpi .item{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:12px 22px;font-weight:700}
+.strip{display:flex;gap:16px;overflow:hidden;margin:24px 0}
+.strip img{height:120px;flex:1;object-fit:cover;border-radius:18px;border:1px solid #E3E9F3;background:linear-gradient(135deg,#DCE7FF,#E6F6F1)}
+.stat-band{background:#fff;border:1px solid #E3E9F3;border-radius:22px;padding:20px 28px;display:flex;gap:36px;justify-content:center;box-shadow:0 8px 30px rgba(27,77,216,.08)}
+.stat-band b{font-size:26px;color:#1B4DD8}
+:focus-visible{outline:4px solid #FFB300;outline-offset:2px}
+details{border:1px solid #E3E9F3;border-radius:14px;padding:16px 20px;margin-bottom:12px;background:#fff}
+details summary{font-weight:700;cursor:pointer;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";float:right;color:#1B4DD8;font-weight:800;font-size:18px}
+details[open] summary::after{content:"–"}
+details p{color:#5B6B82;margin:12px 0 0}
+.hero-float{position:absolute;background:rgba(255,255,255,.95);color:#0F1B2D;border-radius:14px;padding:10px 16px;font-size:13px;font-weight:700;box-shadow:0 12px 32px rgba(0,0,0,.25)}
+.tick{display:inline-block;padding:8px 18px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);font-size:13px;font-weight:600;margin:0 6px 6px 0}
+.kicker{display:inline-block;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#0E9F8A;margin:0 0 8px}
+.ticker{overflow:hidden;background:#0B1730;color:#DCE5F2;border-radius:16px;padding:14px 0;margin:0 0 24px;white-space:nowrap}
+.ticker-in{display:inline-block;animation:tickmove 30s linear infinite}
+@keyframes tickmove{to{transform:translateX(-50%)}}
+.ticker span{margin:0 26px;font-weight:600;font-size:14px}
+.ticker b{color:#7EA4FF}
+.hero h1{max-width:1000px;line-height:1.15}</style><div style="background:#F2F5FB"><div class="nav"><a class="logo" href="02-home.html"><img src="figma-assets/logo.png" alt="Logo KerjaSetara">KerjaSetara</a><a class="link" href="03-search.html">Cari Lowongan</a><a class="link" href="19-companies.html">Daftar Perusahaan</a><a class="link" href="18-info.html">Tips Karir</a><a class="link" href="20-employer.html">Penyedia Kerja</a><span style="flex:1"></span><span class="chip">Profil 70% lengkap</span></div>
+<div style="max-width:680px;padding:0 24px;margin:48px auto"><div class="card" style="background:#ffffff"><p><a href="08-wizard-1.html">? 1 Data diri</a> • <b>Langkah 2 dari 2</b> — Kebutuhan</p><h2 style="margin-top:0">Apa yang kamu butuhkan?</h2>
+<p style="display:flex;gap:16px"><label style="flex:1;min-width:0">Pendidikan<br><input style="width:100%;min-height:52px" value="SMK Tata Busana"></label><label style="flex:1;min-width:0">Pengalaman<br><input style="width:100%;min-height:52px" value="Penjahit 2 tahun"></label></p>
+<p><label>Keahlian (skill[])<br><input style="width:100%;min-height:52px" value="Menjahit, pola dasar, Excel dasar"></label></p>
+<p><label>CV / portofolio (PDF, maks 2MB)<br><input style="width:100%;min-height:52px" type="file"></label></p>
+<div class="card" style="background:#E6F6F1;border:none"><p style="margin-top:0"><b>Akomodasi yang dibutuhkan</b></p><p><span class="mode-pill" style="border-color:#0E9F8A">? Instruksi tertulis</span> <span class="mode-pill">Tempat duduk ergonomis</span> <span class="mode-pill">Jam fleksibel</span> <span class="mode-pill">Juru isyarat</span> <span class="mode-pill">Ruang tenang</span> <span class="mode-pill">Screen reader</span></p></div>
+<div class="card" style="background:#EAF0FE;border:none"><p style="margin-top:0"><b>Privasi data disabilitas</b></p><p><label><input type="radio" name="p"> Penuh — bagikan ke penyedia kerja</label><br><label><input type="radio" name="p" checked> Sebagian — sembunyikan detail, tampilkan akomodasi saja</label><br><label><input type="radio" name="p"> Privat — hanya untuk pencocokan AI</label></p></div>
+<p><a class="btn btn-ghost" href="08-wizard-1.html">? Kembali</a> <a class="btn" href="10-resume.html">Selesai — Lihat Resume →</a></p></div></div>
+<div class="footer"><div style="display:flex;gap:32px"><div><b>KerjaSetara</b><p>Jaringan karir inklusif untuk pekerja dengan disabilitas.</p><p><a href="18-info.html">Baca selengkapnya →</a></p></div><div><b>Fitur</b><p><a href="10-resume.html">Profil</a><br><a href="11-matcher.html">Lowongan Cocok</a><br><a href="13-my-jobs.html">Lowongan Disimpan</a><br><a href="13-my-jobs.html">Lamaran Dikirim</a><br><a href="14-network.html">Koneksi</a></p></div><div><b>Perusahaan</b><p><a href="18-info.html">Tentang</a><br><a href="18-info.html">Mitra</a><br><a href="18-info.html">Hubungi Kami</a><br><a href="18-info.html">FAQ</a></p></div><div><b>Penyedia Kerja</b><p><a href="20-employer.html">Pasang iklan gratis</a><br><a href="07-register-company.html">Mendaftar</a><br><a href="21-pricing.html">Layanan & Biaya</a></p></div></div></div></div>
