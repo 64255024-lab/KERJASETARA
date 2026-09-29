@@ -12,7 +12,7 @@
 </style></head>
 <body>
   <h2>KerjaSetara Autowire</h2>
-  <p class="sub">Wire prototype otomatis dari teks tombol (On Click → Navigate To). Frame harus bernama <b>NN-*</b> (02-home … 21-pricing) dalam 1 page.</p>
+  <p class="sub">Wire prototype otomatis dari teks tombol (On Click → Navigate To). Frame harus bernama <b>NN-*</b> (<b>01-02-home … 20-21-pricing</b>, urutan file zip) dalam 1 page.</p>
   <label class="row"><input type="checkbox" id="nav" checked> Nav global (nav + footer links)</label>
   <label class="row"><input type="checkbox" id="cards" checked> Wire sekartu loker (klik kartu → detail)</label>
   <label class="row"><input type="checkbox" id="smart" checked> Transisi Smart Animate</label>
@@ -20,7 +20,7 @@
   <button id="scan" class="ghost">1 · Scan frame di page ini</button>
   <button id="wire">2 · Wire prototype sekarang</button>
   <div id="frames"></div>
-  <div id="log">Siap. Klik Scan dulu.</div>
+  <div id="log">Siap. Klik Scan dulu — cek "Kunci:" di log cocok dengan 02-home … 21-pricing.</div>
 <script>
   const log = t => { const el=document.getElementById('log'); el.textContent += '\n'+t; el.scrollTop=el.scrollHeight; };
   document.getElementById('scan').onclick = () => parent.postMessage({pluginMessage:{type:'scan'}},'*');
