@@ -162,6 +162,19 @@ function findFrame(frames, prefix) {
   return frames.find((f) => frameKey(f.name).startsWith(p)) || null;
 }
 
+// Kumpulkan frame di seluruh page (rekursif): import berurut sering masuk Section/Grup,
+// page.children hanya baca level atas sehingga Scan 0 walau frame ada di kanvas.
+function collectFrames(page) {
+  try {
+    return page.findAll((n) =>
+      (n.type === "FRAME" || n.type === "COMPONENT" || n.type === "INSTANCE") &&
+      /^\d+-/.test(n.name || "")
+    );
+  } catch (e) {
+    return page.children.filter((n) => n.type === "FRAME" && /^\d+-/.test(n.name || ""));
+  }
+}
+
 // Naik 1 level kalau parent kelihatan seperti tombol (bungkus 1-3 anak, kecil)
 function pickTarget(textNode) {
   try {
@@ -201,9 +214,10 @@ figma.ui.onmessage = async (msg) => {
   try {
     if (msg.type === "scan") {
       try { await figma.loadAllPagesAsync(); } catch (e) {}
-      const frames = figma.currentPage.children
-        .filter((n) => n.type === "FRAME" && /^\d+-/.test(n.name))
-        .map((f) => ({ id: f.id, name: f.name }));
+      const found = collectFrames(figma.currentPage);
+      const top = figma.currentPage.children.map((c) => c.type + ":" + (c.name || "?")).join(" | ").slice(0, 300);
+      figma.ui.postMessage({ type: "log", text: "Level-atas: " + top });
+      const frames = found.map((f) => ({ id: f.id, name: f.name }));
       const keys = [...new Set(frames.map((f) => frameKey(f.name)))].sort();
       figma.ui.postMessage({ type: "scanned", frames });
       figma.ui.postMessage({ type: "log", text: `Ketemu ${frames.length} frame. Kunci: ${keys.join(", ") || "-"}` });
@@ -218,7 +232,7 @@ figma.ui.onmessage = async (msg) => {
       );
       try { await figma.loadAllPagesAsync(); } catch (e) {}
       const page = figma.currentPage;
-      const frames = page.children.filter((n) => n.type === "FRAME" && /^\d+-/.test(n.name));
+      const frames = collectFrames(page);
       if (frames.length === 0) {
         figma.ui.postMessage({ type: "log", text: "❌ Ga ada frame NN-* (01-02-home … 20-21-pricing) di page ini." });
         return;
