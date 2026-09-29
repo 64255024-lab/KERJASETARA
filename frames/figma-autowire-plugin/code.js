@@ -162,17 +162,59 @@ function findFrame(frames, prefix) {
   return frames.find((f) => frameKey(f.name).startsWith(p)) || null;
 }
 
-// Kumpulkan frame di seluruh page (rekursif): import berurut sering masuk Section/Grup,
-// page.children hanya baca level atas sehingga Scan 0 walau frame ada di kanvas.
-function collectFrames(page) {
+// Layar = anak level-atas page (FRAME, SECTION, GROUP...) yang namanya diawali NN-.
+// Import ZIP via html.to.design membungkus tiap layar dalam SECTION bernama
+// "01-02-home.html - figma-import-... by html.to.design", jadi scan lama
+// (cari FRAME berawalan digit) selalu 0 walau layar ada di kanvas.
+function topChild(node) {
   try {
-    return page.findAll((n) =>
-      (n.type === "FRAME" || n.type === "COMPONENT" || n.type === "INSTANCE") &&
-      /^\d+-/.test(n.name || "")
-    );
-  } catch (e) {
-    return page.children.filter((n) => n.type === "FRAME" && /^\d+-/.test(n.name || ""));
+    let cur = node, up = 0;
+    while (cur && cur.parent && cur.parent.type !== "PAGE" && up < 20) { cur = cur.parent; up++; }
+    return cur;
+  } catch (e) { return null; }
+}
+
+// "01-02-home.html - figma-import-..." -> "02-home"; "01-02-home" -> "02-home"; "02-home" tetap.
+function screenKey(name) {
+  const n = (name || "").toLowerCase();
+  const m = n.match(/^(\d+)-(\d+)-([a-z0-9]+)/);
+  if (m) return `${m[2]}-${m[3]}`;
+  return frameKey(name);
+}
+
+function collectScreens(page) {
+  let all = [];
+  try {
+    all = page.findAll((n) => n.type === "TEXT" || n.type === "FRAME" || n.type === "COMPONENT" || n.type === "INSTANCE");
+  } catch (e) { return { screens: [], renamed: 0 }; }
+  const map = new Map();
+  for (const n of all) {
+    const top = topChild(n);
+    if (!top) continue;
+    const key = screenKey(top.name);
+    if (!/^\d\d-/.test(key)) continue;
+    if (!map.has(top.id)) map.set(top.id, { root: top, key, texts: [], frames: [] });
+    const s = map.get(top.id);
+    if (n.type === "TEXT") s.texts.push(n);
+    else s.frames.push(n);
   }
+  let renamed = 0;
+  const screens = [];
+  for (const s of map.values()) {
+    let rep = null, best = 0;
+    for (const c of s.frames) {
+      const a = (c.width || 0) * (c.height || 0);
+      if (a > best) { best = a; rep = c; }
+    }
+    if (!rep) rep = s.root;
+    // rapikan nama frame utama agar Present & Scan berikut rapi
+    try {
+      if (rep !== s.root && !/^\d\d-/.test(rep.name || "")) { rep.name = s.key; renamed++; }
+    } catch (e) {}
+    screens.push({ root: s.root, key: s.key, texts: s.texts, rep });
+  }
+  screens.sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
+  return { screens, renamed };
 }
 
 // Naik 1 level kalau parent kelihatan seperti tombol (bungkus 1-3 anak, kecil)
@@ -214,14 +256,15 @@ figma.ui.onmessage = async (msg) => {
   try {
     if (msg.type === "scan") {
       try { await figma.loadAllPagesAsync(); } catch (e) {}
-      const found = collectFrames(figma.currentPage);
-      const top = figma.currentPage.children.map((c) => c.type + ":" + (c.name || "?")).join(" | ").slice(0, 300);
+      const page = figma.currentPage;
+      const top = page.children.map((c) => c.type + ":" + (c.name || "?")).join(" | ").slice(0, 300);
       figma.ui.postMessage({ type: "log", text: "Level-atas: " + top });
-      const frames = found.map((f) => ({ id: f.id, name: f.name }));
-      const keys = [...new Set(frames.map((f) => frameKey(f.name)))].sort();
-      figma.ui.postMessage({ type: "scanned", frames });
-      figma.ui.postMessage({ type: "log", text: `Ketemu ${frames.length} frame. Kunci: ${keys.join(", ") || "-"}` });
-      figma.notify(`Ketemu ${frames.length} frame NN-* di halaman ini`);
+      const { screens, renamed } = collectScreens(page);
+      const keys = screens.map((s) => s.key);
+      figma.ui.postMessage({ type: "scanned", frames: screens.map((s) => ({ id: s.rep.id, name: s.key })) });
+      figma.ui.postMessage({ type: "log", text: `Ketemu ${screens.length} layar. Kunci: ${keys.join(", ") || "-"}` });
+      if (renamed) figma.ui.postMessage({ type: "log", text: `Dirapikan ${renamed} nama frame utama → kunci NN-slug.` });
+      figma.notify(`Ketemu ${screens.length} layar NN-* di halaman ini`);
       return;
     }
 
@@ -232,17 +275,19 @@ figma.ui.onmessage = async (msg) => {
       );
       try { await figma.loadAllPagesAsync(); } catch (e) {}
       const page = figma.currentPage;
-      const frames = collectFrames(page);
-      if (frames.length === 0) {
-        figma.ui.postMessage({ type: "log", text: "❌ Ga ada frame NN-* (01-02-home … 20-21-pricing) di page ini." });
+      const { screens } = collectScreens(page);
+      if (screens.length === 0) {
+        figma.ui.postMessage({ type: "log", text: "❌ Ga ada layar NN-* (01-02-home … 20-21-pricing) di page ini." });
         return;
       }
       const log = (t) => figma.ui.postMessage({ type: "log", text: t });
       let wired = 0, skipped = 0, noDest = 0;
       const wiredIds = new Set();
+      const byKey = {};
+      for (const s of screens) byKey[s.key] = s;
 
-      for (const src of frames) {
-        const fk = frameKey(src.name); // "02-home" walau nama frame "01-02-home"
+      for (const src of screens) {
+        const fk = src.key; // "02-home" walau section bernama "01-02-home.html - ...zip by html.to.design"
         const short = fk.slice(0, 2); // "02"
         // cari rules: cocokkan key diawali digit yg sama
         const rules = [];
@@ -251,13 +296,7 @@ figma.ui.onmessage = async (msg) => {
         }
         if (opt.includeNav) rules.push(...NAV);
 
-        let texts = [];
-        try {
-          texts = src.findAll((n) => n.type === "TEXT");
-        } catch (e) {
-          log(`⚠️ ${src.name}: findAll gagal (${e.message})`);
-          continue;
-        }
+        let texts = src.texts;
         let srcCount = 0;
         for (const t of texts) {
           let raw = "", ch = "";
@@ -280,9 +319,9 @@ figma.ui.onmessage = async (msg) => {
             if (hit) destKey = hit.d;
           }
           if (!destKey) continue;
-          const dest = findFrame(frames, destKey);
+          const dest = byKey[destKey] || screens.find((s) => s.key.startsWith(destKey)) || null;
           if (!dest) { noDest++; continue; }
-          if (dest.id === src.id) continue; // jangan self-link
+          if (dest.rep.id === src.rep.id) continue; // jangan self-link
 
           const target = pickTarget(t);
           if (wiredIds.has(target.id)) continue;
@@ -290,11 +329,11 @@ figma.ui.onmessage = async (msg) => {
             if (opt.onlyEmpty && target.reactions && target.reactions.length > 0) { skipped++; continue; }
           } catch (e) {}
           try {
-            await setNav(target, dest.id, opt.smart);
+            await setNav(target, dest.rep.id, opt.smart);
             wiredIds.add(target.id);
             wired++; srcCount++;
           } catch (e) {
-            log(`⚠️ gagal: ${src.name} "${ch.slice(0, 30)}" → ${e.message}`);
+            log(`⚠️ gagal: ${src.key} "${ch.slice(0, 30)}" → ${e.message}`);
           }
 
           // wire sekartu penuh (ancestor besar) untuk link kartu
@@ -309,7 +348,7 @@ figma.ui.onmessage = async (msg) => {
                 let has = false;
                 try { has = card.reactions && card.reactions.length > 0; } catch (e) {}
                 if (!(opt.onlyEmpty && has)) {
-                  await setNav(card, dest.id, opt.smart);
+                  await setNav(card, dest.rep.id, opt.smart);
                   wiredIds.add(card.id);
                   wired++; srcCount++;
                 }
@@ -317,7 +356,7 @@ figma.ui.onmessage = async (msg) => {
             } catch (e) {}
           }
         }
-        log(`• ${src.name}: ${srcCount} koneksi`);
+        log(`• ${src.key}: ${srcCount} koneksi`);
       }
       log(`——\n✅ Selesai: ${wired} koneksi. Skip: ${skipped}. Tujuan tak ketemu: ${noDest}.`);
       log(`▶️ Klik Play (Present) — kalau flow belum mulai di home: klik kanan frame 01-02-home > Add starting point.`);
