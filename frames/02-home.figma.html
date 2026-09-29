@@ -2,7 +2,21 @@
 *{box-sizing:border-box}html{background:#F2F5FB}body{margin:0 auto;font-family:'Plus Jakarta Sans',Inter,Arial,sans-serif;color:#0F1B2D;background:#F2F5FB;width:100%;max-width:1440px;min-height:100vh;-webkit-font-smoothing:antialiased}img{max-width:100%}
 a{color:#1B4DD8;text-decoration:none}
 a:hover{text-decoration:underline}
-input,select,textarea{border:1.5px solid #E3E9F3;border-radius:14px;padding:0 16px;font:inherit;background:#fff;transition:border-color .2s,box-shadow .2s}
+input,select,textarea{border:1.5px solid #E3E9F3;border-radius:14px;padding:14px 16px;font:inherit;background:#fff;transition:border-color .2s,box-shadow .2s;line-height:1.5}
+textarea{resize:vertical}
+select{appearance:none;-webkit-appearance:none;padding-right:44px}
+input[type=checkbox]{width:20px;height:20px;flex-shrink:0;padding:0;min-height:0;border-radius:6px;accent-color:#1B4DD8}
+.field{display:block;font-weight:600;margin:0 0 20px}
+.field .lbl{display:block;margin-bottom:8px}
+.field>input,.field>select,.field>textarea{display:block;width:100%;font-weight:400}
+.frow{display:flex;gap:16px}
+.frow>.field{flex:1;min-width:0}
+.sel-wrap{position:relative}
+.sel-wrap .chev{position:absolute;right:16px;top:50%;transform:translateY(-50%);pointer-events:none;color:#5B6B82;font-weight:800}
+.acc-grid{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 0;padding:0}
+.acc-grid .chip{flex:1 1 30%;min-width:170px;text-align:center}
+.check-grid{display:flex;flex-wrap:wrap;gap:10px 20px}
+.check-grid label{flex:1 1 40%;min-width:200px;display:flex;gap:10px;align-items:center;font-weight:500}
 input:focus,select:focus,textarea:focus{border-color:#1B4DD8;box-shadow:0 0 0 4px rgba(27,77,216,.15);outline:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 32px;border-radius:999px;background:linear-gradient(135deg,#1B4DD8,#3B6BF0);color:#fff;font-weight:700;text-decoration:none;box-shadow:0 8px 20px rgba(27,77,216,.28);transition:transform .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(27,77,216,.34);text-decoration:none;color:#fff}

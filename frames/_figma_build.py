@@ -103,6 +103,8 @@ for f in sorted(glob.glob(os.path.join(BASE, '*.html'))):
                   '<div style="width:640px;margin:32px auto 0">')
     h = h.replace('<div style="max-width:680px;padding:0 24px;margin:48px auto">',
                   '<div style="width:680px;margin:48px auto">')
+    h = h.replace('<div style="max-width:760px;padding:0 24px;margin:32px auto 0">',
+                  '<div style="width:760px;margin:32px auto 0">')
     # input/select/textarea width:100% + min-height: tanpa max-width parent benar
     # kadang collapse; kunci min-width agar kolom form gak menyusut
     h = h.replace('<label style="flex:1;min-width:0">', '<label style="flex:1">')
