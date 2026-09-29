@@ -148,8 +148,6 @@ for f in sorted(glob.glob(os.path.join(BASE, '*.html'))):
                   'display:flex;gap:32px')
     h = h.replace('display:grid;grid-template-columns:repeat(4,1fr);gap:24px',
                   'display:flex;gap:24px')
-    h = h.replace('display:grid;grid-template-columns:1fr 1fr;gap:0 32px;margin-top:16px',
-                  'display:flex;gap:0 32px;margin-top:16px')
     h = h.replace('display:grid;grid-template-columns:repeat(3,1fr);gap:24px',
                   'display:flex;gap:24px')
 
