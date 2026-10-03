@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Nav from "../../../../components/Nav";
-import Footer from "../../../../components/Footer";
-import { getSeed, ACC_LABEL } from "../../../../lib/data";
+import Nav from "../../../components/Nav";
+import Footer from "../../../components/Footer";
+import { getSeed, ACC_LABEL } from "../../../lib/data";
 
 export default function JobDetailPage({ params }: { params: { id: string } }) {
   const seed = getSeed();

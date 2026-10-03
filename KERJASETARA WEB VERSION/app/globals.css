@@ -26,3 +26,13 @@ input[type=radio]{width:20px;height:20px;flex-shrink:0;padding:0;min-height:0;ac
 .searchbar input{border:none;box-shadow:none;flex:1;min-height:48px}
 .searchbar input:focus{box-shadow:none}
 :focus-visible{outline:4px solid var(--focus);outline-offset:2px}
+/* Task 7 polish: responsive + reduced-motion */
+@media (max-width:900px){
+.nav{flex-wrap:wrap;gap:16px;padding:16px 24px}
+.hero{border-radius:0 0 32px 32px}
+.footer{padding:32px 24px}
+}
+@media (prefers-reduced-motion: reduce){
+.btn:hover,.job-card:hover{transform:none;box-shadow:var(--shadow)}
+*{transition:none !important}
+}

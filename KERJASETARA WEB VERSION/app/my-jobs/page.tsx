@@ -1,9 +1,9 @@
 import Link from "next/link";
-import Nav from "../../../components/Nav";
-import Footer from "../../../components/Footer";
-import JobCard from "../../../components/JobCard";
-import { getSeed } from "../../../lib/data";
-import { getApplications, getSaved } from "../../../lib/store";
+import Nav from "../../components/Nav";
+import Footer from "../../components/Footer";
+import JobCard from "../../components/JobCard";
+import { getSeed } from "../../lib/data";
+import { getApplications, getSaved } from "../../lib/store";
 
 export default async function MyJobsPage() {
   const seed = getSeed();

@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Nav from "../../../components/Nav";
-import Footer from "../../../components/Footer";
-import { getDraft, getSession } from "../../../lib/session";
-import { ACC_LABEL } from "../../../lib/data";
+import Nav from "../../components/Nav";
+import Footer from "../../components/Footer";
+import { getDraft, getSession } from "../../lib/session";
+import { ACC_LABEL } from "../../lib/data";
 
 export default async function ResumePage() {
   const session = await getSession();

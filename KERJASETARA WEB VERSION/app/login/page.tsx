@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
-import Nav from "../../../components/Nav";
-import Footer from "../../../components/Footer";
-import { setSession } from "../../../lib/session";
+import Nav from "../../components/Nav";
+import Footer from "../../components/Footer";
+import { setSession } from "../../lib/session";
 
 export default function LoginPage() {
   async function loginTalent() {

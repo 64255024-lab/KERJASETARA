@@ -1,10 +1,10 @@
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
-import Nav from "../../../../components/Nav";
-import Footer from "../../../../components/Footer";
-import { getSeed } from "../../../../lib/data";
-import { getDraft, getSession } from "../../../../lib/session";
-import { addApplication } from "../../../../lib/store";
+import Nav from "../../../components/Nav";
+import Footer from "../../../components/Footer";
+import { getSeed } from "../../../lib/data";
+import { getDraft, getSession } from "../../../lib/session";
+import { addApplication } from "../../../lib/store";
 
 export default async function ApplyPage({ params }: { params: { id: string } }) {
   const seed = getSeed();

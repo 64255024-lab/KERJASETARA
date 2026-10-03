@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import Nav from "../../../../components/Nav";
-import Footer from "../../../../components/Footer";
-import { getSeed } from "../../../../lib/data";
-import { getDraft, getSession } from "../../../../lib/session";
-import { matchJob } from "../../../../lib/matcher";
-import { addApplication, addSaved } from "../../../../lib/store";
+import Nav from "../../../components/Nav";
+import Footer from "../../../components/Footer";
+import { getSeed } from "../../../lib/data";
+import { getDraft, getSession } from "../../../lib/session";
+import { matchJob } from "../../../lib/matcher";
+import { addApplication, addSaved } from "../../../lib/store";
 
 export default async function MatcherPage({ params }: { params: { id: string } }) {
   const seed = getSeed();

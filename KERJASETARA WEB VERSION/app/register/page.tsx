@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
-import Nav from "../../../components/Nav";
-import Footer from "../../../components/Footer";
-import { setDraft } from "../../../lib/session";
+import Nav from "../../components/Nav";
+import Footer from "../../components/Footer";
+import { setDraft } from "../../lib/session";
 
 const CATS = ["Produksi", "Administrasi", "Kreatif", "Layanan", "Teknologi", "Kuliner"];
 const DISA = ["daksa", "rungu wicara", "netra", "grahita", "mental"];

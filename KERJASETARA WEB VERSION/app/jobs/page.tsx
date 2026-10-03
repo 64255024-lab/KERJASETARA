@@ -2,10 +2,10 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import Nav from "../../../components/Nav";
-import Footer from "../../../components/Footer";
-import JobCard from "../../../components/JobCard";
-import { getSeed, ACC_LABEL } from "../../../lib/data";
+import Nav from "../../components/Nav";
+import Footer from "../../components/Footer";
+import JobCard from "../../components/JobCard";
+import { getSeed, ACC_LABEL } from "../../lib/data";
 
 const ALL_ACC = Object.keys(ACC_LABEL);
 

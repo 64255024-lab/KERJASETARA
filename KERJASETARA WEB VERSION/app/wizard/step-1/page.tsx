@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import Nav from "../../../../components/Nav";
-import Footer from "../../../../components/Footer";
-import { getDraft, setDraft } from "../../../../lib/session";
+import Nav from "../../../components/Nav";
+import Footer from "../../../components/Footer";
+import { getDraft, setDraft } from "../../../lib/session";
 
 export default async function WizardStep1() {
   const draft = await getDraft();
