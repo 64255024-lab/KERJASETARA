@@ -1,30 +1,68 @@
-import { redirect } from "next/navigation";
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Nav from "../../components/Nav";
 import Footer from "../../components/Footer";
-import { setDraft } from "../../lib/session";
+import { supabaseBrowser } from "../../lib/supabase-browser";
 
 const CATS = ["Produksi", "Administrasi", "Kreatif", "Layanan", "Teknologi", "Kuliner"];
-const DISA = ["Tuna daksa", "Tuna rungu wicara", "Tuna netra", "Tuna grahita", "Disabilitas mental"];
-const NEEDS = ["kursi-roda", "isyarat", "screen-reader", "tertulis", "remote", "fleksibel", "mentor", "tenang"];
 
 export default function RegisterPage() {
-  async function submit(form: FormData) {
-    "use server";
-    const role = form.get("role") === "company" ? "company" : "talent";
-    const disabilities = form.getAll("disabilities").map(String);
-    const needs = form.getAll("needs").map(String);
-    await setDraft({
-      role,
-      name: `${String(form.get("first") ?? "")} ${String(form.get("last") ?? "")}`.trim(),
-      city: String(form.get("city") ?? ""),
-      category: String(form.get("category") ?? ""),
-      disabilities,
-      needs,
-      skills: String(form.get("skills") ?? "").split(",").map((s) => s.trim()).filter(Boolean),
-      experienceYears: Number(form.get("experience") ?? 0),
+  const router = useRouter();
+  const [role, setRole] = useState<"talent" | "company">("talent");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [err, setErr] = useState("");
+
+  const configured = Boolean(
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+  );
+
+  async function signupGoogle() {
+    setErr("");
+    const supabase = supabaseBrowser();
+    if (!supabase) {
+      setErr("Konfigurasi daftar belum dipasang di server. Coba lagi nanti.");
+      return;
+    }
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${window.location.origin}/auth/callback` },
     });
-    redirect("/wizard/step-1");
+    if (error) setErr(error.message);
   }
+
+  async function signupEmail(e: React.FormEvent) {
+    e.preventDefault();
+    setErr("");
+    const supabase = supabaseBrowser();
+    if (!supabase) {
+      setErr("Konfigurasi daftar belum dipasang di server. Coba lagi nanti.");
+      return;
+    }
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { role, name } },
+    });
+    if (error) {
+      setErr(error.message);
+      return;
+    }
+    if (data.user) {
+      // Baris profil dibuat di sini (fallback callback juga membuatnya).
+      await supabase.from("profiles").upsert(
+        { id: data.user.id, role, name, email },
+        { onConflict: "id" }
+      );
+    }
+    router.push("/wizard/step-1");
+    router.refresh();
+  }
+
   return (
     <>
       <Nav />
@@ -41,34 +79,37 @@ export default function RegisterPage() {
         <div className="card" style={{ padding: 32 }}>
           <h2 style={{ margin: "0 0 4px" }}>Langkah 1 dari 2 — Akun</h2>
           <p style={{ color: "var(--muted)", margin: "0 0 24px", fontSize: 14 }}>
-            Semua field wajib kecuali foto (nanti).
+            Buat akun dulu, profil dilengkapi di langkah 2.
           </p>
-          <form action={submit}>
+          {!configured && (
+            <p className="badge">Mode demo — daftar server belum dikonfigurasi</p>
+          )}
+          <button
+            className="btn"
+            type="button"
+            onClick={signupGoogle}
+            disabled={!configured}
+            style={{ width: "100%", opacity: configured ? 1 : 0.5 }}
+          >
+            Daftar dengan Google
+          </button>
+          <p style={{ textAlign: "center", color: "var(--muted)", margin: "20px 0" }}>— atau —</p>
+          <form onSubmit={signupEmail}>
             <div className="field">
               <span className="lbl">Saya mendaftar sebagai</span>
               <div style={{ display: "flex", gap: 16, fontWeight: 400 }}>
-                <label><input type="radio" name="role" value="talent" defaultChecked /> Talent</label>
-                <label><input type="radio" name="role" value="company" /> Perusahaan</label>
+                <label>
+                  <input type="radio" name="role" value="talent" checked={role === "talent"} onChange={() => setRole("talent")} /> Talent
+                </label>
+                <label>
+                  <input type="radio" name="role" value="company" checked={role === "company"} onChange={() => setRole("company")} /> Perusahaan
+                </label>
               </div>
             </div>
             <div className="frow">
               <label className="field">
-                <span className="lbl">Nama depan</span>
-                <input name="first" placeholder="Sinta" required />
-              </label>
-              <label className="field">
-                <span className="lbl">Nama belakang</span>
-                <input name="last" placeholder="Prameswari" required />
-              </label>
-            </div>
-            <label className="field">
-              <span className="lbl">Email</span>
-              <input name="email" type="email" placeholder="nama@email.com" required />
-            </label>
-            <div className="frow">
-              <label className="field">
-                <span className="lbl">Kota</span>
-                <input name="city" placeholder="Semarang" required />
+                <span className="lbl">Nama</span>
+                <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Sinta Prameswari" required />
               </label>
               <label className="field">
                 <span className="lbl">Kategori minat</span>
@@ -80,41 +121,19 @@ export default function RegisterPage() {
                 </span>
               </label>
             </div>
-            <div className="card" style={{ background: "var(--primary-soft)", border: "none", margin: "0 0 20px" }}>
-              <p style={{ margin: 0 }}><b>Kriteria disabilitas</b></p>
-              <p style={{ margin: "4px 0 0", color: "var(--muted)", fontSize: 14 }}>
-                Pilih semua yang sesuai — privat, hanya untuk pencocokan AI, tidak tampil publik.
-              </p>
-              <div className="acc-grid">
-                {DISA.map((d) => (
-                  <label className="chip" key={d} style={{ background: "#fff", border: "1.5px solid var(--line)", color: "var(--muted)", cursor: "pointer", fontWeight: 400 }}>
-                    <input type="checkbox" name="disabilities" value={d} style={{ display: "none" }} /> {d}
-                  </label>
-                ))}
-              </div>
-            </div>
-            <div className="field">
-              <span className="lbl">Kebutuhan akomodasi</span>
-              <div className="check-grid">
-                {NEEDS.map((n) => (
-                  <label key={n} style={{ fontWeight: 400 }}>
-                    <input type="checkbox" name="needs" value={n} /> {n}
-                  </label>
-                ))}
-              </div>
-            </div>
-            <div className="frow">
-              <label className="field">
-                <span className="lbl">Keahlian (pisahkan koma)</span>
-                <input name="skills" placeholder="menjahit, excel-dasar" />
-              </label>
-              <label className="field">
-                <span className="lbl">Pengalaman (tahun)</span>
-                <input name="experience" type="number" min={0} defaultValue={0} />
-              </label>
-            </div>
+            <label className="field">
+              <span className="lbl">Email</span>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="nama@email.com" required />
+            </label>
+            <label className="field">
+              <span className="lbl">Password</span>
+              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Min. 6 karakter" required minLength={6} />
+            </label>
+            {err && <p style={{ color: "#B42318" }}>{err}</p>}
             <p style={{ margin: "0 0 12px" }}>
-              <button className="btn" type="submit" style={{ width: "100%" }}>Lanjutkan ke profil →</button>
+              <button className="btn" type="submit" disabled={!configured} style={{ width: "100%", opacity: configured ? 1 : 0.5 }}>
+                Buat akun →
+              </button>
             </p>
             <p style={{ color: "var(--muted)", fontSize: 14, textAlign: "center", margin: 0 }}>
               Sudah punya akun? <a href="/login">Masuk</a>
