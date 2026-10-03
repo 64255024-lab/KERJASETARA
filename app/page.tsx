@@ -65,7 +65,16 @@ export default function Home() {
       </div>
 
       <div style={{ padding: "40px 64px 0" }}>
-        <h2 style={{ margin: 0 }}>Lowongan terbaru</h2>
+        <div className="strip">
+          <Image src="/assets/strip-kantor-1.jpg" alt="Suasana kantor inklusif" width={300} height={120} />
+          <Image src="/assets/strip-interview.jpg" alt="Interview inklusif dengan juru isyarat" width={300} height={120} />
+          <Image src="/assets/strip-workshop.jpg" alt="Pendampingan kerja di workshop" width={300} height={120} />
+          <Image src="/assets/strip-ruang-tenang.jpg" alt="Ruang tenang ramah sensorik" width={300} height={120} />
+        </div>
+        <div style={{ display: "flex", alignItems: "end", justifyContent: "space-between" }}>
+          <h2 style={{ margin: 0 }}>Lowongan terbaru</h2>
+          <Link href="/jobs">Lihat semua →</Link>
+        </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24, marginTop: 16 }}>
           {seed.jobs.map((j) => (
             <div className="job-card" key={j.id}>
@@ -101,6 +110,51 @@ export default function Home() {
           <Link className="btn" style={{ background: "#fff", color: "var(--primary)", boxShadow: "none" }} href="/register">
             Buat profil
           </Link>
+        </div>
+        <h2 style={{ marginTop: 56 }}>Tips karier</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24 }}>
+          <div className="card">
+            <Image src="/assets/tips-cv.jpg" alt="Contoh CV di meja" width={300} height={110} style={{ width: "100%", height: 110, objectFit: "cover", borderRadius: 12 }} />
+            <b>CV percaya diri</b>
+            <p style={{ color: "var(--muted)" }}>Tulis akomodasi sebagai kebutuhan profesional.</p>
+            <p><Link href="/info">Baca →</Link></p>
+          </div>
+          <div className="card">
+            <Image src="/assets/tips-interview.jpg" alt="Simulasi interview" width={300} height={110} style={{ width: "100%", height: 110, objectFit: "cover", borderRadius: 12 }} />
+            <b>Siap interview</b>
+            <p style={{ color: "var(--muted)" }}>Minta adaptasi tanpa ragu.</p>
+            <p><Link href="/info">Baca →</Link></p>
+          </div>
+          <div className="card">
+            <Image src="/assets/tips-hak.jpg" alt="Dokumen hak ketenagakerjaan" width={300} height={110} style={{ width: "100%", height: 110, objectFit: "cover", borderRadius: 12 }} />
+            <b>Kenali hakmu</b>
+            <p style={{ color: "var(--muted)" }}>Kuota & hak kerja inklusif.</p>
+            <p><Link href="/info">Baca →</Link></p>
+          </div>
+          <div className="card">
+            <Image src="/assets/tips-portofolio.jpg" alt="Portofolio karya desain" width={300} height={110} style={{ width: "100%", height: 110, objectFit: "cover", borderRadius: 12 }} />
+            <b>Bangun portofolio</b>
+            <p style={{ color: "var(--muted)" }}>Tunjukkan karya terbaikmu.</p>
+            <p><Link href="/info">Baca →</Link></p>
+          </div>
+        </div>
+        <h2 style={{ marginTop: 56 }}>Dipercaya perusahaan inklusif</h2>
+        <div style={{ display: "flex", gap: 16 }}>
+          <div className="card" style={{ flex: 1, textAlign: "center", color: "var(--muted)" }}>
+            <Image src="/assets/logo-apparel.png" alt="Logo Apparel Satu" width={120} height={40} style={{ height: 40, width: "auto" }} /><br />Apparel Satu
+          </div>
+          <div className="card" style={{ flex: 1, textAlign: "center", color: "var(--muted)" }}>
+            <Image src="/assets/logo-mahayasa.png" alt="Logo Mahayasa" width={120} height={40} style={{ height: 40, width: "auto" }} /><br />Mahayasa
+          </div>
+          <div className="card" style={{ flex: 1, textAlign: "center", color: "var(--muted)" }}>
+            <Image src="/assets/logo-karsa.png" alt="Logo Karsa" width={120} height={40} style={{ height: 40, width: "auto" }} /><br />Studio Karsa
+          </div>
+          <div className="card" style={{ flex: 1, textAlign: "center", color: "var(--muted)" }}>
+            <Image src="/assets/logo-layanan.png" alt="Logo Layanan Prima" width={120} height={40} style={{ height: 40, width: "auto" }} /><br />Layanan Prima
+          </div>
+          <div className="card" style={{ flex: 1, textAlign: "center", color: "var(--muted)" }}>
+            <Image src="/assets/logo-cerah.png" alt="Logo Media Cerah" width={120} height={40} style={{ height: 40, width: "auto" }} /><br />Media Cerah
+          </div>
         </div>
       </div>
 
