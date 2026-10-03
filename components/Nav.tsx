@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import NavAuth from "./NavAuth";
 
 export default function Nav() {
   return (
@@ -13,8 +14,7 @@ export default function Nav() {
       <Link className="link" href="/info">Tips Karir</Link>
       <Link className="link" href="/employer">Penyedia Kerja</Link>
       <span style={{ flex: 1 }}></span>
-      <Link className="link" href="/login">Masuk</Link>
-      <Link className="btn" href="/register">Daftar</Link>
+      <NavAuth />
     </div>
   );
 }
