@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { use, useMemo, useState } from "react";
 import Link from "next/link";
 import Nav from "../../components/Nav";
 import Footer from "../../components/Footer";
@@ -9,10 +9,11 @@ import { getSeed, ACC_LABEL } from "../../lib/data";
 
 const ALL_ACC = Object.keys(ACC_LABEL);
 
-export default function JobsPage({ searchParams }: { searchParams: { q?: string } }) {
+export default function JobsPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+  const { q: initialQ } = use(searchParams);
   const seed = getSeed();
   const companies = new Map(seed.companies.map((c) => [c.id, c]));
-  const [q, setQ] = useState(searchParams.q ?? "");
+  const [q, setQ] = useState(initialQ ?? "");
   const [acc, setAcc] = useState<string[]>([]);
   const [cats, setCats] = useState<string[]>([]);
   const [cities, setCities] = useState<string[]>([]);

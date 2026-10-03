@@ -7,9 +7,10 @@ import { getDraft, getSession } from "../../../lib/session";
 import { matchJob } from "../../../lib/matcher";
 import { addApplication, addSaved } from "../../../lib/store";
 
-export default async function MatcherPage({ params }: { params: { id: string } }) {
+export default async function MatcherPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const seed = getSeed();
-  const job = seed.jobs.find((j) => j.id === params.id);
+  const job = seed.jobs.find((j) => j.id === id);
   if (!job) return notFound();
   const jobId = job.id;
   const draft = await getDraft();

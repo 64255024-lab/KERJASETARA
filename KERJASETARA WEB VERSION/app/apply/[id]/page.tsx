@@ -6,9 +6,10 @@ import { getSeed } from "../../../lib/data";
 import { getDraft, getSession } from "../../../lib/session";
 import { addApplication } from "../../../lib/store";
 
-export default async function ApplyPage({ params }: { params: { id: string } }) {
+export default async function ApplyPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const seed = getSeed();
-  const job = seed.jobs.find((j) => j.id === params.id);
+  const job = seed.jobs.find((j) => j.id === id);
   if (!job) return notFound();
   const jobTitle = job.title;
   const jobId = job.id;

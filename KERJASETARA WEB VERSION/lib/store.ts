@@ -22,7 +22,7 @@ export async function getApplications(): Promise<string[]> {
 
 export async function addApplication(id: string): Promise<void> {
   const cur = await readList(APPS_COOKIE);
-  if (!cur.includes(id)) writeList(APPS_COOKIE, [...cur, id]);
+  if (!cur.includes(id)) await writeList(APPS_COOKIE, [...cur, id]);
 }
 
 export async function getSaved(): Promise<string[]> {
@@ -31,5 +31,5 @@ export async function getSaved(): Promise<string[]> {
 
 export async function addSaved(id: string): Promise<void> {
   const cur = await readList(SAVED_COOKIE);
-  if (!cur.includes(id)) writeList(SAVED_COOKIE, [...cur, id]);
+  if (!cur.includes(id)) await writeList(SAVED_COOKIE, [...cur, id]);
 }

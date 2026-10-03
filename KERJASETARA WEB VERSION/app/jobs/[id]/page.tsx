@@ -5,9 +5,10 @@ import Nav from "../../../components/Nav";
 import Footer from "../../../components/Footer";
 import { getSeed, ACC_LABEL } from "../../../lib/data";
 
-export default function JobDetailPage({ params }: { params: { id: string } }) {
+export default async function JobDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const seed = getSeed();
-  const job = seed.jobs.find((j) => j.id === params.id);
+  const job = seed.jobs.find((j) => j.id === id);
   if (!job) return notFound();
   const company = seed.companies.find((c) => c.id === job.companyId);
 
