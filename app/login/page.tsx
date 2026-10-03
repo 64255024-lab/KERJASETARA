@@ -12,9 +12,18 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
 
+  const configured = Boolean(
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+  );
+
   async function loginGoogle() {
     setErr("");
     const supabase = supabaseBrowser();
+    if (!supabase) {
+      setErr("Konfigurasi login belum dipasang di server. Coba lagi nanti.");
+      return;
+    }
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo: `${window.location.origin}/auth/callback` },
@@ -26,6 +35,10 @@ export default function LoginPage() {
     e.preventDefault();
     setErr("");
     const supabase = supabaseBrowser();
+    if (!supabase) {
+      setErr("Konfigurasi login belum dipasang di server. Coba lagi nanti.");
+      return;
+    }
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
       setErr(error.message);
@@ -44,7 +57,16 @@ export default function LoginPage() {
           <p style={{ color: "var(--muted)" }}>
             Masuk dengan Google atau email untuk melamar dan menyimpan lowongan.
           </p>
-          <button className="btn" type="button" onClick={loginGoogle} style={{ width: "100%" }}>
+          {!configured && (
+            <p className="badge">Mode demo — login server belum dikonfigurasi</p>
+          )}
+          <button
+            className="btn"
+            type="button"
+            onClick={loginGoogle}
+            disabled={!configured}
+            style={{ width: "100%", opacity: configured ? 1 : 0.5 }}
+          >
             Masuk dengan Google
           </button>
           <p style={{ textAlign: "center", color: "var(--muted)", margin: "20px 0" }}>— atau —</p>
@@ -58,7 +80,7 @@ export default function LoginPage() {
               <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" required />
             </label>
             {err && <p style={{ color: "#B42318" }}>{err}</p>}
-            <button className="btn btn-ghost" type="submit" style={{ width: "100%" }}>
+            <button className="btn btn-ghost" type="submit" disabled={!configured} style={{ width: "100%", opacity: configured ? 1 : 0.5 }}>
               Masuk dengan email
             </button>
           </form>

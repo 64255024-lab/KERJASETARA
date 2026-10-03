@@ -9,6 +9,7 @@ export default function NavAuth() {
 
   useEffect(() => {
     const supabase = supabaseBrowser();
+    if (!supabase) return; // env belum dipasang — tampil sebagai logged-out
     supabase.auth.getUser().then(({ data }) => setLoggedIn(Boolean(data.user)));
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) =>
       setLoggedIn(Boolean(session?.user))
@@ -18,6 +19,7 @@ export default function NavAuth() {
 
   async function logout() {
     const supabase = supabaseBrowser();
+    if (!supabase) return;
     await supabase.auth.signOut();
     window.location.href = "/";
   }
